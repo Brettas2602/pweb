@@ -15,8 +15,14 @@ public class LoginServlet extends HttpServlet{
 	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String email = req.getParameter("email");
 		final String password = req.getParameter("password");
+		req.setAttribute("email", email);
+		req.setAttribute("password", password);
 		
-		System.out.println("O email digitado foi: " + email);
-		System.out.println("A senha digitada foi: " + password);
+		if (email.equals("pweb@gmail.com") && password.equals("09042024")) {
+			req.getRequestDispatcher("autenticado.jsp").forward(req, resp);
+		}else {
+			req.setAttribute("valoresIncorretos", true);
+			req.getRequestDispatcher("index.jsp").forward(req, resp);
+		}
 	}
 }
