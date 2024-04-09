@@ -18,8 +18,8 @@ public class LoginServlet extends HttpServlet{
 		req.setAttribute("email", email);
 		req.setAttribute("password", password);
 		
-		if (email.equals("pweb@gmail.com") && password.equals("09042024")) {
-			req.getRequestDispatcher("autenticado.jsp").forward(req, resp);
+		if (email.contains("@ifgoiano") && password.equals("123456")) {
+			req.getRequestDispatcher("dashboard.html").forward(req, resp);
 		}else {
 			req.setAttribute("valoresIncorretos", true);
 			req.getRequestDispatcher("index.jsp").forward(req, resp);
