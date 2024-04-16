@@ -1,12 +1,17 @@
 package br.edu.ifgoiano.controle;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.edu.ifgoiano.entidade.Usuario;
+import br.edu.ifgoiano.repositorio.UsuarioRepositorio;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet{
@@ -15,14 +20,23 @@ public class LoginServlet extends HttpServlet{
 	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String email = req.getParameter("email");
 		final String password = req.getParameter("password");
-		req.setAttribute("email", email);
-		req.setAttribute("password", password);
 		
-		if (email.contains("@ifgoiano") && password.equals("123456")) {
-			req.getRequestDispatcher("dashboard.html").forward(req, resp);
+		if (password != null && password.equals("123456")) {
+			try {
+				UsuarioRepositorio repositorio = new UsuarioRepositorio();
+				
+				List<Usuario> lstUsuario = repositorio.listarUsuarios();
+				
+				req.setAttribute("usuarios", lstUsuario);
+				
+				req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ServletException("Erro na listagem de usuários");
+			}
 		}else {
-			req.setAttribute("valoresIncorretos", true);
-			req.getRequestDispatcher("index.jsp").forward(req, resp);
+			
 		}
 	}
 }
