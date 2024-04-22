@@ -33,10 +33,11 @@ public class LoginServlet extends HttpServlet{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-				throw new ServletException("Erro na listagem de usuários");
+				throw new ServletException("Erro na listagem de usuï¿½rios");
 			}
 		}else {
-			
+			req.setAttribute("valoresIncorretos", true);
+			req.getRequestDispatcher("index.jsp").forward(req, resp);
 		}
 	}
 }
