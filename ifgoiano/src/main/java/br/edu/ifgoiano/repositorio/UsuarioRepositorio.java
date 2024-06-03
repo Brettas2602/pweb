@@ -16,14 +16,14 @@ public class UsuarioRepositorio {
 	private Connection conn;
 
 	public UsuarioRepositorio() throws SQLException{
-		conn = DriverManager.
+		this.conn = DriverManager.
 	            getConnection("jdbc:h2:~/test", "sa", "sa");
 	}
 	
 	public List<Usuario> listarUsuarios(){
 		List<Usuario> lstUsuarios = new ArrayList<Usuario>();
 		
-		String sql = "select id, nome, email, senha, data_nascimento from usuario";
+		String sql = "select id, nome, email, senha from usuario";
 		
 		try {
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -35,15 +35,30 @@ public class UsuarioRepositorio {
 				usuario.setNome(resultSet.getString("nome"));
 				usuario.setEmail(resultSet.getString("email"));
 				usuario.setSenha(resultSet.getString("senha"));
-				usuario.setDataNascimento(resultSet.getDate("data_nascimento"));
 				
 				lstUsuarios.add(usuario);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Erro na consulta de usu�rios");
+			System.out.println("Erro na consulta de usu�rios");
 		}
 		
 		return lstUsuarios;
+	}
+	
+	public void incluirUsuario(Usuario usuario) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into usuario (nome, email, senha) ");
+		sql.append("values (?,?,?)");
+		
+		try {
+			PreparedStatement pst = conn.prepareStatement(sql.toString());
+			pst.setString(1, usuario.getNome());
+			pst.setString(2, usuario.getEmail());
+			pst.setString(3, usuario.getSenha());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro na inclusão de usuários");
+		}
 	}
 }

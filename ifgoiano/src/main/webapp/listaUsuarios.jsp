@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -15,15 +15,24 @@
 </style>
 <body>
 	<table>
-		<c:forEach items="${usuarios}" var="usu">
+		<thead>
 			<tr>
-				<td>Id: ${usu.getId()}</td>
-				<td>Nome: ${usu.getNome()}</td>
-				<td>Email: ${usu.getEmail()}</td>
-				<td>senha: ${usu.getSenha()}</td>
-				<td>Data de Nascimento: ${usu.getDataNascimento()}</td>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Senha</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach items="${usuarios}" var="usu" varStatus="id">
+				<tr class="${id.count % 2 == 0 ? 'table-primary' : 'table-secondary'}">
+					<td>${usu.getId()}</td>
+					<td>${usu.getNome()}</td>
+					<td>${usu.getEmail()}</td>
+					<td>${usu.getSenha()}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 </body>
 </html>
