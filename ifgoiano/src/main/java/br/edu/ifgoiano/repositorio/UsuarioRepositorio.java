@@ -56,6 +56,11 @@ public class UsuarioRepositorio {
 			pst.setString(1, usuario.getNome());
 			pst.setString(2, usuario.getEmail());
 			pst.setString(3, usuario.getSenha());
+			
+			pst.execute();
+			
+			conn.commit();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Erro na inclusão de usuários");

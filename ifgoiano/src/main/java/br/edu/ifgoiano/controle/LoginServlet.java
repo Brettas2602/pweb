@@ -53,6 +53,26 @@ public class LoginServlet extends HttpServlet{
 			e.printStackTrace();
 			System.out.println("Erro no servlet");
 		}
-		
 	}
+	
+	@Override
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			Usuario usuario = new Usuario();
+			usuario.setNome(req.getParameter("name"));
+			usuario.setEmail(req.getParameter("email"));
+			usuario.setSenha(req.getParameter("password"));
+
+			try {
+				UsuarioRepositorio repositorio = new UsuarioRepositorio();
+				repositorio.incluirUsuario(usuario);
+
+				req.setAttribute("usuarios", repositorio.listarUsuarios());
+
+				req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Erro na autenticação dos usuários");
+			}
+		}
 }

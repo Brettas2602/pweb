@@ -114,18 +114,18 @@
 			
 			<div class="form-floating">
 				<input type="text" class="form-control" id="floatingInput"
-					name="name"> <label
+					name="name" placeholder=""> <label
 					for="floatingInput">Name</label>
 			</div>
 
 			<div class="form-floating">
 				<input type="email" class="form-control" id="floatingInput"
-					name="email"> <label
+					name="email" placeholder=""> <label
 					for="floatingInput">Email address</label>
 			</div>
 			<div class="form-floating">
 				<input type="password" class="form-control" id="floatingPassword"
-					name="password"> <label
+					name="password" placeholder=""> <label
 					for="floatingPassword">Password</label>
 			</div>
 
