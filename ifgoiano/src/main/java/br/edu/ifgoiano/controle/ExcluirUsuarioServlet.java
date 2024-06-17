@@ -31,8 +31,19 @@ public class ExcluirUsuarioServlet extends HttpServlet{
 			atividades.setAcao("exclusão");
 			atividadeRepositorio.insertAtividades(atividades);
 			
-			req.setAttribute("usuarios", repositorio.listUsuarios());
-			req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
+			if ((Integer) session.getAttribute("usuarioId") == id) {
+				Atividades atividades2 = new Atividades();
+				atividades2.setUsuario_id((Integer) session.getAttribute("usuarioId"));
+				atividades2.setAcao("logout");
+				atividadeRepositorio.insertAtividades(atividades2);
+				session.invalidate();
+				req.setAttribute("mensagem", "Você excluiu o seu próprio usuário!");
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
+			}else {
+				req.setAttribute("usuarios", repositorio.listUsuarios());
+				resp.sendRedirect("listaUsuarios.jsp");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

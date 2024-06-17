@@ -55,7 +55,7 @@ public class EditarUsuarioServlet extends HttpServlet{
 				atividadeRepositorio.insertAtividades(atividades);
 				
 				req.setAttribute("usuarios", repositorio.listUsuarios());
-				req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
+				resp.sendRedirect("listaUsuarios.jsp");
 			}else {
 				String mensagem = "As senhas informadas não são iguais!";
 				

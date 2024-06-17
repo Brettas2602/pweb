@@ -1,5 +1,5 @@
 <%@page import="br.edu.ifgoiano.repositorio.UsuarioRepositorio"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
 	%>
 	<main class="form-signin w-100 m-auto">
 		<form action="signIn" method="post">
-			<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+			<h1 class="h3 mb-3 fw-normal">Cadastro de usuário</h1>
 			
 			<div class="form-floating">
 				<input type="text" class="form-control" id="floatingInput" name="name" placeholder=""> 

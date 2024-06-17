@@ -41,12 +41,12 @@ public class LoginServlet extends HttpServlet{
 				session.setAttribute("usuario", usuario);
 				session.setAttribute("usuarioId", repositorio.getUsuarioByEmail(req.getParameter("email")).getId());
 
-				req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
+				resp.sendRedirect("listaUsuarios.jsp");
 			}else {
 				String mensagem = "Email ou senha incorretos!";
 				
 				req.setAttribute("mensagem", mensagem);
-				req.getRequestDispatcher("login.jsp").forward(req, resp);
+				req.getRequestDispatcher("login.jsp").forward(req, resp);;
 			}
 			
 		} catch (Exception e) {

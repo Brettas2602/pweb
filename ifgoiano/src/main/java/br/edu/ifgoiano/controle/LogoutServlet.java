@@ -24,11 +24,11 @@ public class LogoutServlet extends HttpServlet{
 			AtividadesRepositorio atividadeRepositorio = new AtividadesRepositorio();
 			Atividades atividades = new Atividades();
 			atividades.setUsuario_id((Integer) session.getAttribute("usuarioId"));
-			atividades.setAcao("exclusão");
+			atividades.setAcao("logout");
 			atividadeRepositorio.insertAtividades(atividades);
 			
 			session.invalidate();
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
+			resp.sendRedirect("login.jsp");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

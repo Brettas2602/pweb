@@ -20,20 +20,6 @@ import br.edu.ifgoiano.repositorio.UsuarioRepositorio;
 
 @WebServlet("/signIn")
 public class SignInServlet extends HttpServlet{
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		try {
-//			UsuarioRepositorio repositorio = new UsuarioRepositorio();
-//
-//			req.setAttribute("usuarios", repositorio.listUsuarios());
-//			
-//			req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			System.out.println("Erro no servlet");
-//		}
-//	}
-	
 	@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			Usuario usuario = new Usuario();
@@ -63,7 +49,7 @@ public class SignInServlet extends HttpServlet{
 					session.setAttribute("usuario", usuario);
 					session.setAttribute("usuarioId", repositorio.getUsuarioByEmail(req.getParameter("email")).getId());
 					
-					req.getRequestDispatcher("listaUsuarios.jsp").forward(req, resp);
+					resp.sendRedirect("listaUsuarios.jsp");
 				}
 				
 
